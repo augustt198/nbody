@@ -27,7 +27,7 @@ void setup_accel(simulation_setup_t *sim) {
     }
 }
 
-#define NPTS 1200
+#define NPTS 1500
 
 float randf() {
     return (float) rand() / RAND_MAX;
@@ -39,11 +39,16 @@ int main(int argc, char **argv) {
     point_mass_t points[NPTS];
 
     for (int i = 0; i < NPTS; i++) {
+        bool part = i > NPTS/2;
         float theta = randf() * 2 * 3.141569;
-        float radius = 2.0 + randf() * 1.0;
+        float radius = 2.0 + randf() * 0.25;
+        radius += part ? 1.0 : 0.0;
         points[i].pos = 2.0f * (vec3){cosf(theta)*radius, sinf(theta)*radius, randf()-0.5};
 
+        //float dir = part ? 1.0 : 1.0;
+
         points[i].vel = 100.f * (vec3){-points[i].pos[1], points[i].pos[0], 0.0};
+        if (part) points[i].vel *= -0.7f;
         points[i].accel = vec3_const(0.0);
         points[i].mass = 0.1;
     }

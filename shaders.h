@@ -30,8 +30,8 @@ static const char* fragment_shader_src =
 "   float pp = length(gl_PointCoord - vec2(0.5)); \n"
 "   vec2 thing = gl_PointCoord - vec2(0.5);\n"
 "   float yo = 2.0*max(0.0, abs(dot(thing, nn.yx)) - 0.05);"
-"   float ye = 1.0*max(0.0, abs(dot(thing, vec2(-nn.x, nn.y))) - 0.5);"
+"   float ye = 1.0*max(0.0, abs(dot(thing, vec2(-nn.x, nn.y))) - 0.0);"
 "   ye = abs(dot(thing, vec2(-nn.x, nn.y)));"
 "   float tt = (1.0 - 5.0*yo) - max(1.0, 5.0 - vv)*ye;"
-"   gl_FragColor = vec4(abs(n), clamp(tt, 0.0, 1.0));\n"
+"   gl_FragColor = vec4(normalize(vec3(0.5)+0.5*n), clamp(tt, 0.0, 1.0));\n"
 "}\n";

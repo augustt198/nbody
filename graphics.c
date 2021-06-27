@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -135,11 +136,13 @@ bool graphics_update(simulation_setup_t *sim) {
     glUseProgram(shader_program);
     //glPointSize(10.0);
 
-    float s = 0.1 + ss;
-    //ss += 0.001;
-    const GLfloat mvp[16] = {s, 0.0, 0.0, 0.0,
+    float s = 0.1;
+    ss += 0.005;
+    float si = sinf(ss), co = cosf(ss);
+
+    const GLfloat mvp[16] = {s*co, 0.0, -s*si, 0.0,
                             0.0, s, 0.0, 0.0,
-                            0.0, 0.0, s, 0.0,
+                            s*si, 0.0, s*co, 0.0,
                             0.0, 0.0, 0.0, 1.0};
     glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, mvp);
     glDrawArrays(GL_POINTS, 0, sim->n_points);

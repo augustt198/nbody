@@ -32,3 +32,11 @@ vec3 vec3_normalize(vec3 v) {
 bool vec3_eq(vec3 u, vec3 v) {
     return u[0] == v[0] && u[1] == v[1] && u[2] == v[2];
 }
+
+bool vec3_leq(vec3 u, vec3 v) {
+    return u[0] <= v[0] && u[1] <= v[1] && u[2] <= v[2];
+}
+
+bool vec3_lt(vec3 u, vec3 v) {
+    return u[0] < v[0] && u[1] < v[1] && u[2] < v[2];
+}

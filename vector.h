@@ -24,3 +24,5 @@ vec3 vec3_cross(vec3 u, vec3 v);
 vec3 vec3_normalize(vec3 v);
 
 bool vec3_eq(vec3 u, vec3 v);
+bool vec3_leq(vec3 u, vec3 v);
+bool vec3_lt(vec3 u, vec3 v);

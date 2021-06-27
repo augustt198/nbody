@@ -56,7 +56,7 @@ PROFILE_PRODUCT = $(PRODUCT:%=%.prof) #the product, instrumented for gprof
 # What we're building with
 CC = clang
 CFLAGS = -std=gnu11 -Wall -fopencilk
-LDFLAGS = -lrt -lm -fopencilk -lglfw -lGL -lGLEW
+LDFLAGS = -lrt -lm -fopencilk -lglfw -lGL -lGLEW -flto
 
 include ./cilkutils.mk
 
@@ -68,7 +68,7 @@ ifeq ($(DEBUG),1)
   CFLAGS += -g -Og -gdwarf-3
 else
   # We want release mode.
-  CFLAGS += -O3 -DNDEBUG
+  CFLAGS += -g -O3 -DNDEBUG -flto
 endif
 
 
