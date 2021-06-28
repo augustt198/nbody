@@ -1,10 +1,13 @@
 #include "simulation.h"
+
 #include <math.h>
+#include "bh.h"
 
 void simulate_step(simulation_setup_t *sim) {
     float G = sim->Gconst;
     int N = sim->n_points;
 
+    /*
     // accumulate acceleration
     for (int i = 0; i < N; i++) {
         sim->points[i].accel = vec3_const(0.0);
@@ -20,6 +23,15 @@ void simulate_step(simulation_setup_t *sim) {
         }
         sim->points[i].accel = accel;
     }
+    */
+
+    bh_node_t *bh = bh_create(N, sim->points);
+    bh_centers(bh);
+    for (int i = 0; i < N; i++) {
+        point_mass_t *pt = &sim->points[i];
+        pt->accel = G * bh_force(bh, pt) / pt->mass;
+    }
+    bh_destroy(bh);
 
     float dt = sim->timestep;
 

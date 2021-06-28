@@ -55,7 +55,7 @@ PROFILE_PRODUCT = $(PRODUCT:%=%.prof) #the product, instrumented for gprof
 
 # What we're building with
 CC = clang
-CFLAGS = -std=gnu11 -Wall -fopencilk
+CFLAGS = -std=gnu11 -Wall -fopencilk -ffast-math
 LDFLAGS = -lrt -lm -fopencilk -lglfw -lGL -lGLEW -flto
 
 include ./cilkutils.mk

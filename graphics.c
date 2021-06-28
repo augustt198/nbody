@@ -103,8 +103,6 @@ bool graphics_init(simulation_setup_t *sim) {
     glEnableVertexAttribArray(pos_loc);
     glVertexAttribPointer(pos_loc, 3, GL_FLOAT, GL_FALSE,
          sizeof(point_mass_t), (void*) 0);
-    //glVertexAttribPointer(pos_loc, 3, GL_FLOAT, GL_FALSE,
-    //    6*sizeof(float), (void*) 0);
 
     glEnableVertexAttribArray(clr_loc);
     glVertexAttribPointer(clr_loc, 3, GL_FLOAT, GL_FALSE,
@@ -125,7 +123,6 @@ bool graphics_update(simulation_setup_t *sim) {
 
     glBindBuffer(GL_ARRAY_BUFFER, buf);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sim->n_points * sizeof(point_mass_t), (void*) &sim->points[0]);
-    float *thing = (float*) &sim->points[0];
 
     int w, h;
     glfwGetFramebufferSize(window, &w, &h);
@@ -140,6 +137,7 @@ bool graphics_update(simulation_setup_t *sim) {
     ss += 0.005;
     float si = sinf(ss), co = cosf(ss);
 
+    // dead simple rotation matrix
     const GLfloat mvp[16] = {s*co, 0.0, -s*si, 0.0,
                             0.0, s, 0.0, 0.0,
                             s*si, 0.0, s*co, 0.0,
